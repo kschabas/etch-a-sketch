@@ -21,11 +21,19 @@ function buildGrid(rownum)
             const square = document.createElement('div');
             square.classList.add('square');
             square.setAttribute('style',`flex: 1 1 auto`);
+            square.addEventListener('mouseover', (e) => { 
+                    square.classList.add('used');
+            });
             row.appendChild(square);
         }
         grid.appendChild(row);
     }
 }
 
-
-buildGrid(16,16);
+var button = document.querySelector('button');
+button.addEventListener('click', (e) => {
+    var size = prompt("Please enter grid size (max 100)");
+    deleteGrid();
+    buildGrid(size);
+});
+buildGrid(16);

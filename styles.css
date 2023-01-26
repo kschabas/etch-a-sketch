@@ -1,12 +1,29 @@
+body {
+    text-align: center;
+}
 .grid-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: auto;
+    border-color: black;
+    border-style: solid;
+}
+
+button {
+    margin: 5px;
 }
 
 .row {
     display: flex;
     justify-content: center;
+}
+
+.square {
+    background-color: oldlace;
+}
+
+.square.used {
+    background-color: black;
 }
