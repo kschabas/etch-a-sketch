@@ -1,3 +1,10 @@
+function deleteGrid() {
+    var rows = document.querySelectorAll('.row');
+    rows.forEach(row => {
+        row.remove();
+    });
+}
+
 function buildGrid(rownum)
 {
     var x,y;
@@ -20,9 +27,11 @@ function buildGrid(rownum)
         for (y=0;y<rownum;y++) {
             const square = document.createElement('div');
             square.classList.add('square');
-            square.setAttribute('style',`flex: 1 1 auto`);
-            square.addEventListener('mouseover', (e) => { 
-                    square.classList.add('used');
+            //square.setAttribute('style',`flex: 1 1 auto;`);
+            square.addEventListener('mouseover', (e) => {
+                if (draw == true)  {
+                    square.setAttribute('style',`background-color: ${color}`);
+                } 
             });
             row.appendChild(square);
         }
@@ -30,10 +39,36 @@ function buildGrid(rownum)
     }
 }
 
-var button = document.querySelector('button');
+var button = document.querySelector('#grid-size');
 button.addEventListener('click', (e) => {
     var size = prompt("Please enter grid size (max 100)");
+    if (size>100) {
+        size = 100;
+    }
     deleteGrid();
     buildGrid(size);
 });
+
+button = document.querySelector('#color');
+button.addEventListener('click', (e) => {
+    var newColor = prompt("please enter color choice");
+    color = newColor;
+});
+
+button = document.querySelector('#draw');
+button.addEventListener('click',(e) => {
+    if (draw == true)
+    {
+        draw = false;
+        e.currentTarget.textContent = "Turn On Pencil";
+    }
+    else {
+        draw = true;
+        e.currentTarget.textContent = "Turn Off Pencil";
+    }
+})
+
+var color = "black";
+var draw = true;
+button = document.querySelector('#color');
 buildGrid(16);
